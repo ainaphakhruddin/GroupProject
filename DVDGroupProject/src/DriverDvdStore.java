@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -62,16 +63,111 @@ public class DriverDvdStore {
 		//examples of the search for method
 		searchFor("The Notebook", temp);
 		//searchFor("High School Musical", temp); //will throw an exception if a DVD doesn't exist
+		
+		
+		//File Scanner reading method
+		/*LinkedPositionalList<DvdType> newLibrary = new LinkedPositionalList<>( );
+		try {
+			importDVDs("DVDList.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		newLibrary.toString();*/
+		
+		//CustomerType toString example
+		String[] rentedDVDs = {"The Avengers", "Spiderman Homecoming","","",""};
+		CustomerType joey = new CustomerType("Joey Jo", 1234, "JoeyJo@email.com", rentedDVDs);
+		System.out.println(joey.toString());
+		
 	}
+	
 	
 	
 	public static LinkedPositionalList<DvdType> importDVDs(String fileName)  throws FileNotFoundException
 	{
 		LinkedPositionalList<DvdType> importedList = new LinkedPositionalList<DvdType>();	//will hold DVDs
-		Scanner DVDScanner = new Scanner(new File(fileName)); 							//A scanner made to read file
 		
+		@SuppressWarnings("resource")
+		Scanner DVDScanner = new Scanner(new FileReader(fileName)); 							//A scanner made to read file
+		
+		//local variables to construct a DVD
+		String title = null;
+		String star = null;
+		String[] starsArr = new String[5];
+		String producer = null;
+		String director = null;
+		String prodCompany = null;
+		String copiesStr;
+		int copies = 0;
+		
+		while (DVDScanner.hasNext()) //while there is still another line in the file
+		{
+			//Making sure scanner gets right strings
+			//creating title
+			if(DVDScanner.nextLine().compareTo("Title:") == 0)
+				 title = DVDScanner.nextLine();
+			else
+			{
+				System.out.println("Improper text format: Title");
+			}
+			
+			//Creating stars string and array
+			if(DVDScanner.nextLine().compareTo("Stars:") == 0)
+				for (int i = 0; i < 5; i++)
+				{	
+					star = DVDScanner.useDelimiter(",").next();
+					starsArr[i] = star;
+				}
+			else
+			{
+				System.out.println("Improper text format: Stars");
+			}
+			
+			
+			//Creating producer
+			if(DVDScanner.nextLine().compareTo("Producer:") == 0)
+				producer = DVDScanner.nextLine();
+			else
+			{
+				System.out.println("Improper text format: Producer");
+			}
+			
+			//Creating director
+			if(DVDScanner.nextLine().compareTo("Director:") == 0)
+				director = DVDScanner.nextLine();
+			else
+			{
+				System.out.println("Improper text format: Director");
+			}
+			
+			//Creating production company
+			if(DVDScanner.nextLine().compareTo("Production Company:") == 0)
+				prodCompany = DVDScanner.nextLine();
+			else
+			{
+				System.out.println("Improper text format: Production Company");
+			}
+			
+			//Creating copies
+			if(DVDScanner.nextLine().compareTo("Copies:") == 0)
+			{
+				copiesStr = DVDScanner.nextLine().replaceAll("\\D+",""); //delete any useless characters 
+				copies = Integer.parseInt(copiesStr); //copies is an int in a DVD object
+			}
+			else
+			{
+				System.out.println("Improper text format: Copies");
+			}
+			
+			//enter local variables into a new DVD
+			DvdType importedDVD = new DvdType(title, starsArr, producer, director, prodCompany, copies);
+			
+			importedList.addLast(importedDVD);
+		}
 		//continuously use importedList.addNext
-		return null;
+		return importedList;
 		
 	}
 	/**
