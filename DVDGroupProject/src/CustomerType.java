@@ -63,6 +63,7 @@ public class CustomerType extends Person{
 	}
 
 
+	//methods to rent and return (simillar to DVDType methods)
 
 	@Override
 	public String toString() {
