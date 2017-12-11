@@ -53,7 +53,7 @@ public class CustomerType extends Person{
 	public String printRentedDVDs()
 	{
 		System.out.println(this.fullName + ": Rented DVDs \n");
-		String[] DVDs = getRentedDVDs();
+		String[] DVDs = this.getRentedDVDs();
 		String borrowList = " ";
 		for (int i = 0; i < DVDs.length; i++)
 		{
@@ -61,20 +61,17 @@ public class CustomerType extends Person{
 		}
 		return borrowList;
 	}
+	
+	
+	//methods to rent and return (similar to DVDType methods)
 
 
-	//methods to rent and return (simillar to DVDType methods)
 
 	@Override
 	public String toString() {
 		 
 		String rentedDVDList = printRentedDVDs();
-		return "CustomerType [fullName=" + fullName + ", accountNumber=" + accountNumber + ", email=" + email + "]";
+		return "CustomerType [fullName=" + fullName + ", accountNumber=" + accountNumber + ", email=" + email + rentedDVDList + "]";
 	}
-	
-	
-	
-	
-	
 
 }
