@@ -21,9 +21,7 @@ public class DvdType {
 	}
 
 
-	public DvdType() {
-		// TODO Auto-generated constructor stub
-	}
+	public DvdType() {}
 
 
 	@Override
@@ -92,14 +90,14 @@ public class DvdType {
 		this.copies = copies;
 	}
 	
-	public void checkOut(DvdType dvd) {
-		if (dvdAvailible(dvd))
+	public void checkOut() {
+		if (dvdAvailible(this))
 			copies--;
 		else
 			System.out.print("This dvd is not availible");
 	}
 	
-	public void checkIn(DvdType dvd) {
+	public void checkIn() {
 		copies++;
 	}
 	

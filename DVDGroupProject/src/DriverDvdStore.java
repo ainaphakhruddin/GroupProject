@@ -19,12 +19,12 @@ public class DriverDvdStore {
 		String[] starsC = new String[] {"Adam Sandler", "Drew Barrymore"};	
 		DvdType c = new DvdType("The Wedding Singer", starsC, "Jack Giarraputow", "Frank Croaci", "New Line Cinema", 10);
 		
-		String[] starsD = new String[] {"Arnald Schwarzenegger", "Linda Hamilton", "Michael Biehn"};	
+		String[] starsD = new String[] {"Arnold Schwarzenegger", "Linda Hamilton", "Michael Biehn"};	
 		DvdType d = new DvdType("The Terminator", starsD, "Gale Ann Hurd", "James Cameron", "Hemdale Film Corporation", 10);
 		
 		
 		//here is the linked list. This creates a head and a tail
-		LinkedPositionalList<DvdType> temp = new LinkedPositionalList<>( );
+		LinkedPositionalList<DvdType> temp = new LinkedPositionalList<>();
 		
 		//adding the elements to the linked list
 		temp.addFirst(a);
@@ -56,10 +56,80 @@ public class DriverDvdStore {
 		System.out.println(checkDVD("The Notebook", temp));
 		printAllDVDs(temp);
 		
+		//Creating some customer to fill a list
+		String[] rentedDVDs1 = {"The Wedding Singer", "The Terminator"};
+		CustomerType joey = new CustomerType("Joey Jo", 1, "JoeyJo@email.com", rentedDVDs1);
+		
+		String[] rentedDVDs2 = {"The Notebook", "The Big Sick"};
+		CustomerType josh = new CustomerType("Josh Smith", 2, "JoshSmith@email.com", rentedDVDs2);
+		
+		String[] rentedDVDs3 = {"The Notebook", "The Terminator"};
+		CustomerType jess = new CustomerType("Jess Cooper", 3, "JessCooper@email.com", rentedDVDs3);
+		
+		String[] rentedDVDs4 = {"The Wedding Singer", "The Big Sick"};
+		CustomerType jill = new CustomerType("Jill Banks", 4, "JillBanks@email.com", rentedDVDs4);
+		
+		
+		//updating out dvdtypes to match whats checked out
+		
+		a.checkOut();
+		a.checkOut();
+		
+		b.checkOut();
+		b.checkOut();
+		
+		c.checkOut();
+		c.checkOut();
+		
+		d.checkOut();
+		d.checkOut();
+		
+		//CustomerType Linked List
+		LinkedPositionalList<CustomerType> tempCust = new LinkedPositionalList<>();
+				
+		//adding the elements to the linked list
+		tempCust.addFirst(joey);
+		tempCust.addFirst(josh);
+		tempCust.addFirst(jess);
+		tempCust.addFirst(jill);
+		
 		//CustomerType toString example
-		String[] rentedDVDs = {"The Avengers", "Spiderman Homecoming"};
-		CustomerType joey = new CustomerType("Joey Jo", 1234, "JoeyJo@email.com", rentedDVDs);
 		System.out.println(joey.toString());
+		
+		
+		//checked out list
+		
+		LinkedPositionalList<CheckedOut> tempCheck = new LinkedPositionalList<>();
+		
+		CheckedOut e = new CheckedOut();
+		
+		e.setTitles(joey.getRentedDVDs());
+		e.setAccountNumber(joey.getAccountNumber());
+		
+		tempCheck.addFirst(e);
+		
+		CheckedOut f = new CheckedOut();
+		
+		f.setTitles(josh.getRentedDVDs());
+		f.setAccountNumber(josh.getAccountNumber());
+		
+		tempCheck.addFirst(f);
+		
+		CheckedOut g = new CheckedOut();
+		
+		g.setTitles(jess.getRentedDVDs());
+		g.setAccountNumber(jess.getAccountNumber());
+		
+		tempCheck.addFirst(g);
+		
+		CheckedOut h = new CheckedOut();
+		
+		h.setTitles(jill.getRentedDVDs());
+		h.setAccountNumber(jill.getAccountNumber());
+		
+		tempCheck.addFirst(h);
+		
+		
 		
 	}
 	
@@ -121,5 +191,4 @@ public class DriverDvdStore {
 	
 	
 }
-
 
